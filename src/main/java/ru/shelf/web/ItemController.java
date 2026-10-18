@@ -46,7 +46,7 @@ public class ItemController {
             return form(model, null);
         }
         shelfService.create(CurrentUser.ownerId(user), item.toCommand());
-        flash.addFlashAttribute("notice", "Запись появилась на твоей полке");
+        flash.addFlashAttribute("notice", "Запись добавлена в коллекцию");
         return "redirect:/shelf";
     }
 

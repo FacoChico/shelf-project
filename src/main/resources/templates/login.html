@@ -6,18 +6,17 @@
     <div th:replace="~{fragments/layout :: brand}"></div>
     <a th:href="@{/}" class="back-link">← На главную</a></header>
 <main id="main" class="login-main">
-    <section class="login-story"><span class="eyebrow">ДЛЯ ТОГО, ЧТО ТЕБЕ ИНТЕРЕСНО</span>
+    <section class="login-story"><span class="eyebrow">ЛИЧНАЯ КОЛЛЕКЦИЯ</span>
         <h1>Хорошо, когда<br>всё <em>на месте.</em></h1>
-        <p>Войди, чтобы собрать свою коллекцию<br>и продолжить с того, на чём остановился.</p>
+        <p>Авторизация предоставляет доступ<br>к коллекции и сохранённым записям.</p>
         <div class="mini-books" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span>
         </div>
     </section>
     <section class="login-card"><span class="round-icon"><svg
             th:replace="~{fragments/icons :: icon('user')}"></svg></span>
-        <h2>Твоя полка ждёт</h2>
-        <p>Один аккаунт для всех твоих историй.</p>
-        <div class="alert alert-error" role="alert" th:if="${param.error}">Не удалось войти. Попробуй ещё раз. Если
-            ошибка повторяется, проверь доступность сервера входа.
+        <h2>Вход в приложение</h2>
+        <p>Единый аккаунт для доступа к коллекции.</p>
+        <div class="alert alert-error" role="alert" th:if="${param.error}">Не удалось выполнить вход. Возможные причины: недоступность сервера авторизации или ошибка обработки запроса.
         </div>
         <a class="button button-full" th:href="@{/oauth2/authorization/keycloak}">Войти в аккаунт
             <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
@@ -26,7 +25,7 @@
         <div class="login-divider"></div>
         <p class="privacy-note">
             <svg th:replace="~{fragments/icons :: icon('lock')}"></svg>
-            Личная коллекция. Только для тебя.
+            Коллекция доступна только владельцу.
         </p>
     </section>
 </main>

@@ -15,11 +15,11 @@
   <div th:replace="~{fragments/layout :: brand}"></div>
   <p class="sidebar-caption">ЛИЧНОЕ ПРОСТРАНСТВО</p>
   <nav class="side-nav" aria-label="Основная навигация">
-    <a th:href="@{/shelf}" th:classappend="${activePage == 'shelf'} ? 'active'" th:attr="aria-current=${activePage == 'shelf' ? 'page' : null}"><svg th:replace="~{fragments/icons :: icon('shelf')}"></svg>Моя полка</a>
-    <a th:href="@{/profile}" th:classappend="${activePage == 'profile'} ? 'active'" th:attr="aria-current=${activePage == 'profile' ? 'page' : null}"><svg th:replace="~{fragments/icons :: icon('user')}"></svg>Мой профиль</a>
+    <a th:href="@{/shelf}" th:classappend="${activePage == 'shelf'} ? 'active'" th:attr="aria-current=${activePage == 'shelf' ? 'page' : null}"><svg th:replace="~{fragments/icons :: icon('shelf')}"></svg>Полка</a>
+    <a th:href="@{/profile}" th:classappend="${activePage == 'profile'} ? 'active'" th:attr="aria-current=${activePage == 'profile' ? 'page' : null}"><svg th:replace="~{fragments/icons :: icon('user')}"></svg>Профиль</a>
   </nav>
-  <div class="sidebar-note"><span class="small-star" aria-hidden="true">✳</span><p>Хорошие истории<br>заслуживают места.</p><span>Сохраняй то, к чему<br>хочется вернуться.</span></div>
-  <div class="account"><span class="avatar" th:text="${#strings.substring(displayName, 0, 1)}">Ч</span><div><strong th:text="${displayName}">Читатель</strong><span>Твоя личная коллекция</span></div></div>
+  <div class="sidebar-note"><span class="small-star" aria-hidden="true">✳</span><p>Хорошие истории<br>заслуживают места.</p><span>Книги, фильмы и игры<br>в одной коллекции.</span></div>
+  <div class="account"><span class="avatar" th:text="${#strings.substring(displayName, 0, 1)}">Ч</span><div><strong th:text="${displayName}">Читатель</strong><span>Личная коллекция</span></div></div>
   <form th:action="@{/logout}" method="post" class="logout-form"><button type="submit" class="text-button"><svg th:replace="~{fragments/icons :: icon('logout')}"></svg>Выйти</button></form>
 </aside>
 <footer th:fragment="footer" class="page-footer"><span>Меньше забытых рекомендаций. Больше хороших историй.</span><span>Полка / 2026</span></footer>

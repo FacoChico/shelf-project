@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/layout :: head('Моя полка')}"></head>
+<head th:replace="~{fragments/layout :: head('Полка')}"></head>
 <body><a class="skip-link" href="#main">К содержимому</a>
 <div class="app-shell">
     <aside th:replace="~{fragments/layout :: sidebar}"></aside>
     <main id="main" class="workspace">
         <header class="page-heading">
-            <div><span class="eyebrow">ТВОЯ ЛИЧНАЯ КОЛЛЕКЦИЯ</span>
-                <h1>Моя полка<span class="title-dot">.</span></h1>
+            <div><span class="eyebrow">ЛИЧНАЯ КОЛЛЕКЦИЯ</span>
+                <h1>Полка<span class="title-dot">.</span></h1>
                 <p>Всё интересное — под рукой.</p></div>
             <a class="button" th:href="@{/items/new}">
                 <svg th:replace="~{fragments/icons :: icon('plus')}"></svg>
@@ -62,7 +62,7 @@
                             th:text="${@viewLabels.status(entry.status)}">В планах</span></span>
                         <h2 th:text="${entry.title}">Название</h2>
                         <p class="item-note"
-                           th:text="${#strings.isEmpty(entry.note) ? 'История ещё впереди. Оставь здесь пару слов для себя.' : entry.note}"></p>
+                           th:text="${#strings.isEmpty(entry.note) ? 'Заметка отсутствует.' : entry.note}"></p>
                         <a class="edit-link" th:href="@{/items/{id}/edit(id=${entry.id})}">Открыть запись
                             <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
                         </a></div>
@@ -70,9 +70,9 @@
             </div>
             <div class="empty-state" th:if="${#lists.isEmpty(items)}">
                 <div class="mini-books" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-                <h2 th:text="${hasFilters ? 'Ничего не нашлось' : 'Первая история — за тобой'}">Первая история — за
+                <h2 th:text="${hasFilters ? 'Ничего не нашлось' : 'На полке пока нет записей'}">Первая история — за
                     тобой</h2>
-                <p th:text="${hasFilters ? 'Попробуй другое название или сбрось фильтры.' : 'Добавь книгу, фильм или игру, к которым хочется вернуться.'}"></p>
+                <p th:text="${hasFilters ? 'По заданным условиям записи отсутствуют.' : 'В коллекцию можно добавлять книги, фильмы и игры.'}"></p>
                 <a th:if="${hasFilters}" class="button button-outline" th:href="@{/shelf}">Показать всю полку</a><a
                     th:unless="${hasFilters}" class="button" th:href="@{/items/new}">
                 <svg th:replace="~{fragments/icons :: icon('plus')}"></svg>

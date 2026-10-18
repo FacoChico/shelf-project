@@ -7,7 +7,7 @@
 </header>
 <main class="error-main"><span class="error-code" th:text="${code}">404</span>
     <h1 th:text="${heading}">На этой полке пусто</h1>
-    <p th:text="${explanation}">Попробуй вернуться на главную.</p><a class="button" th:href="@{/}">На главную
+    <p th:text="${explanation}">Доступен переход на главную страницу.</p><a class="button" th:href="@{/}">На главную
         <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
     </a></main>
 </body>

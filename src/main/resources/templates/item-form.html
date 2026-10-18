@@ -4,19 +4,18 @@
 <body><a class="skip-link" href="#main">К содержимому</a>
 <div class="app-shell">
     <aside th:replace="~{fragments/layout :: sidebar}"></aside>
-    <main id="main" class="workspace"><a class="back-link" th:href="@{/shelf}">← Моя полка</a>
+    <main id="main" class="workspace"><a class="back-link" th:href="@{/shelf}">← Полка</a>
         <header class="page-heading form-heading">
             <div><span class="eyebrow">МЕСТО ДЛЯ НОВОЙ ИСТОРИИ</span>
-                <h1 th:text="${editing ? 'Твоя запись.' : 'Добавим на полку?'}">Добавим на полку?</h1>
-                <p th:text="${editing ? 'Обнови статус или оставь впечатления для себя.' : 'Пара деталей — и интересная находка не потеряется.'}"></p>
+                <h1 th:text="${editing ? 'Редактирование записи' : 'Новая запись'}">Новая запись</h1>
+                <p th:text="${editing ? 'Редактирование статуса и заметки.' : 'Название, категория, статус и заметка.'}"></p>
             </div>
         </header>
         <div class="form-layout">
             <section class="form-panel">
                 <form th:action="${editing} ? @{/items/{id}(id=${itemId})} : @{/items}" th:object="${item}"
                       method="post" class="item-form">
-                    <div class="alert alert-error" role="alert" th:if="${#fields.hasAnyErrors()}">Проверь отмеченные
-                        поля: запись пока не сохранена.
+                    <div class="alert alert-error" role="alert" th:if="${#fields.hasAnyErrors()}">В форме обнаружены ошибки. Запись не сохранена.
                     </div>
                     <div class="field"><label for="title">Название <span class="required-mark">*</span></label><input
                             id="title" th:field="*{title}" maxlength="160" required
@@ -25,7 +24,7 @@
                         <p id="title-error" class="field-error" th:if="${#fields.hasErrors('title')}"
                            th:errors="*{title}"></p></div>
                     <div class="field-row">
-                        <div class="field"><label for="category">Что это?</label><select id="category"
+                        <div class="field"><label for="category">Категория</label><select id="category"
                                                                                          th:field="*{category}"
                                                                                          required>
                             <option th:each="c : ${categories}" th:value="${c}"
@@ -33,7 +32,7 @@
                         </select>
                             <p class="field-error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
                         </div>
-                        <div class="field"><label for="status">На каком этапе?</label><select id="status"
+                        <div class="field"><label for="status">Статус</label><select id="status"
                                                                                               th:field="*{status}"
                                                                                               required>
                             <option th:each="s : ${statuses}" th:value="${s}"
@@ -47,7 +46,7 @@
                                                                                    maxlength="2000"
                                                                                    placeholder="Кто посоветовал? Что зацепило? Или что осталось после финала…"
                                                                                    aria-describedby="note-hint"></textarea>
-                        <div class="field-caption"><span id="note-hint">Только для тебя. До 2 000 символов.</span><span
+                        <div class="field-caption"><span id="note-hint">Личная заметка. До 2 000 символов.</span><span
                                 id="note-counter" aria-hidden="true"></span></div>
                         <p class="field-error" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p></div>
                     <div class="form-actions">
@@ -58,9 +57,9 @@
                 </form>
             </section>
             <aside class="form-aside"><span class="small-star" aria-hidden="true">✳</span>
-                <h2>Можно без<br>больших планов.</h2>
-                <p>Полка — не список обязательств. Здесь живёт то, что тебе интересно прямо сейчас.</p>
-                <p>Вернуться, передумать, начать заново — всё в порядке.</p>
+                <h2>Записи<br>коллекции.</h2>
+                <p>Коллекция предназначена для хранения рекомендаций и личных планов.</p>
+                <p>Статус и заметку можно изменить в любое время.</p>
                 <form th:if="${editing}" th:action="@{/items/{id}/delete(id=${itemId})}" method="post"
                       data-confirm="Удалить запись с полки? Восстановить её не получится.">
                     <button type="submit" class="delete-button">Удалить запись</button>

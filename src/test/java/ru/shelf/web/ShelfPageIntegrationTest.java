@@ -17,7 +17,7 @@ class ShelfPageIntegrationTest extends WebIntegrationTest {
     void emptyShelfAndProfileRender() throws Exception {
         mvc.perform(get("/shelf").with(as("alice")))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Первая история")));
+                .andExpect(content().string(containsString("На полке пока нет записей")));
         mvc.perform(get("/profile").with(as("alice")))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("alice@example.test")));

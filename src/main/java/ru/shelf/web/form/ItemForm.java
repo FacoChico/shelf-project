@@ -9,14 +9,14 @@ import ru.shelf.service.dto.ItemCommand;
 import ru.shelf.service.dto.ShelfItemData;
 
 public class ItemForm {
-    @NotBlank(message = "Укажи название")
+    @NotBlank(message = "Название обязательно")
     @Size(max = 160, message = "Название должно быть не длиннее 160 символов")
     private String title = "";
 
-    @NotNull(message = "Выбери категорию")
+    @NotNull(message = "Категория обязательна")
     private Category category = Category.BOOK;
 
-    @NotNull(message = "Выбери статус")
+    @NotNull(message = "Статус обязателен")
     private ItemStatus status = ItemStatus.PLANNED;
 
     @Size(max = 2000, message = "Заметка должна быть не длиннее 2000 символов")

@@ -15,7 +15,7 @@ public class WebExceptionHandler {
     String itemNotFound(Model model) {
         model.addAttribute("code", 404);
         model.addAttribute("heading", "На этой полке пусто");
-        model.addAttribute("explanation", "Запись не найдена или недоступна твоему аккаунту.");
+        model.addAttribute("explanation", "Запись не найдена или недоступна текущему аккаунту.");
         return "error";
     }
 }

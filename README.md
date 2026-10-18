@@ -14,7 +14,7 @@ Java 21 · Spring Boot 4 · Gradle (Groovy) · PostgreSQL · Thymeleaf.
 ./gradlew bootRun
 ```
 
-Приложение: http://localhost:8080. Используй `localhost`: он указан в OAuth redirect URI.
+Приложение: http://localhost:8080. В OAuth redirect URI зарегистрировано имя `localhost`.
 Скрипт создаёт `.env` и `.local/credentials.txt` с паролями пользователей
 `reader`, `second-reader` и администратора Keycloak.
 

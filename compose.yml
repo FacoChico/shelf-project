@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: shelf
       POSTGRES_USER: shelf
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python3 scripts/init-local.py first}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Missing local configuration (scripts/init-local.py)}
     ports:
       - "127.0.0.1:5433:5432"
     volumes:
@@ -23,7 +23,7 @@ services:
     command: [ "start-dev", "--import-realm" ]
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: shelf-admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Run python3 scripts/init-local.py first}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Missing local configuration (scripts/init-local.py)}
       KC_HOSTNAME: http://localhost:8180
     ports:
       - "127.0.0.1:8180:8080"

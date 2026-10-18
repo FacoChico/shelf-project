@@ -11,16 +11,16 @@
     <section class="hero-copy"><span class="eyebrow">КНИГИ · ФИЛЬМЫ · ИГРЫ</span>
         <h1>Всё, что хочется.<br><em>На одной полке.</em></h1>
         <p class="hero-description">Та самая книга из разговора. Фильм, который все советуют. Игра на длинные выходные.
-            Сохрани — и возвращайся, когда придёт время.</p><a class="button" th:href="@{/login}">Собрать свою полку
+            Рекомендации и планы сохраняются в личной коллекции.</p><a class="button" th:href="@{/login}">Открыть коллекцию
             <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
         </a>
         <p class="privacy-note">
             <svg th:replace="~{fragments/icons :: icon('lock')}"></svg>
-            Твоя коллекция видна только тебе
+            Коллекция доступна только владельцу
         </p>
     </section>
     <section class="hero-art" aria-label="Пример будущей коллекции">
-        <div class="art-caption"><span>ТВОЯ СЛЕДУЮЩАЯ ИСТОРИЯ</span><span>↗</span></div>
+        <div class="art-caption"><span>КНИГИ, ФИЛЬМЫ И ИГРЫ</span><span>↗</span></div>
         <div class="display-books" aria-hidden="true">
             <div class="display-book book-one"><span>книги</span><strong>Между<br>строк</strong><small>01 /
                 ЧИТАТЬ</small></div>
@@ -33,14 +33,14 @@
         <p class="art-footnote">Место найдётся для каждой истории.</p></section>
     <section class="landing-features" aria-label="Возможности">
         <div><span>01</span>
-            <h2>Не теряй находки</h2>
-            <p>Добавляй рекомендации, пока они свежи в памяти.</p></div>
+            <h2>Сохранённые рекомендации</h2>
+            <p>Книги, фильмы и игры в одном списке.</p></div>
         <div><span>02</span>
-            <h2>Выбирай под настроение</h2>
+            <h2>Поиск по категориям</h2>
             <p>Книга на вечер или игра на выходные — всё рядом.</p></div>
         <div><span>03</span>
-            <h2>Отмечай пройденное</h2>
-            <p>Меняй статус и оставляй заметки для себя.</p></div>
+            <h2>Статусы и заметки</h2>
+            <p>Для каждой записи доступны статус и личная заметка.</p></div>
     </section>
 </main>
 <footer th:replace="~{fragments/layout :: footer}"></footer>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate local-only secrets and a Keycloak realm. Existing configuration is preserved."""
+"""Local secret and Keycloak realm initialization. Existing configuration is preserved."""
 import json
 import os
 import secrets
@@ -11,11 +11,11 @@ local = root / ".local"
 realm_path = local / "keycloak" / "shelf-realm.json"
 if env_path.exists():
     if not realm_path.exists():
-        raise SystemExit("Есть .env, но отсутствует .local/keycloak/shelf-realm.json. Восстанови файл из резервной копии или переименуй .env перед новой инициализацией. Данные БД при этом не сбрасываются.")
+        raise SystemExit("Локальная конфигурация неполна: отсутствует .local/keycloak/shelf-realm.json. Для повторной инициализации требуется восстановление файла из резервной копии либо переименование .env. Данные БД сохраняются.")
     print("Локальные настройки уже существуют. Секреты и пользователи сохранены.")
     raise SystemExit(0)
 if local.exists() and any(local.iterdir()):
-    raise SystemExit("Папка .local уже содержит файлы. Проверь их перед инициализацией.")
+    raise SystemExit("Инициализация остановлена: папка .local уже содержит файлы.")
 local.mkdir(mode=0o700, exist_ok=True)
 realm_path.parent.mkdir(mode=0o700, exist_ok=True)
 client_secret = secrets.token_urlsafe(40)
@@ -69,7 +69,7 @@ with env_path.open("x") as output:
 os.chmod(env_path, 0o600)
 credentials = local / "credentials.txt"
 with credentials.open("x") as output:
-    output.write(f"Локальный учебный стенд Полка\n\nПриложение: http://localhost:8080\nЛогин: reader\nПароль: {reader_password}\n\nВторой аккаунт: second-reader\nПароль: {other_password}\n\nKeycloak: http://localhost:8180/admin/\nЛогин администратора: shelf-admin\nПароль: {admin_password}\n\nНе добавляй этот файл, .env и .local в Git и не включай секреты в скриншоты.\n")
+    output.write(f"Локальный учебный стенд Полка\n\nПриложение: http://localhost:8080\nЛогин: reader\nПароль: {reader_password}\n\nВторой аккаунт: second-reader\nПароль: {other_password}\n\nKeycloak: http://localhost:8180/admin/\nЛогин администратора: shelf-admin\nПароль: {admin_password}\n\nЭтот файл, .env и .local содержат секреты и не предназначены для публикации в Git или на скриншотах.\n")
 os.chmod(credentials, 0o600)
 print("Созданы .env, конфигурация Keycloak и .local/credentials.txt.")
-print("Следующий шаг: docker compose up -d")
+print("Запуск инфраструктуры: docker compose up -d")
