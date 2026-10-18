@@ -69,7 +69,7 @@ with env_path.open("x") as output:
 os.chmod(env_path, 0o600)
 credentials = local / "credentials.txt"
 with credentials.open("x") as output:
-    output.write(f"Локальный учебный стенд Полка\n\nПриложение: http://localhost:8080\nЛогин: reader\nПароль: {reader_password}\n\nВторой аккаунт: second-reader\nПароль: {other_password}\n\nKeycloak: http://localhost:8180/admin/\nЛогин администратора: shelf-admin\nПароль: {admin_password}\n\nЭтот файл, .env и .local содержат секреты и не предназначены для публикации в Git или на скриншотах.\n")
+    output.write(f"Локальный учебный стенд Полка\n\nПриложение: http://localhost:8080\nЛогин: reader\nПароль: {reader_password}\n\nВторой аккаунт: second-reader\nПароль: {other_password}\n\nKeycloak: http://localhost:8180/admin/\nЛогин администратора: shelf-admin\nПароль: {admin_password}\n")
 os.chmod(credentials, 0o600)
 print("Созданы .env, конфигурация Keycloak и .local/credentials.txt.")
 print("Запуск инфраструктуры: docker compose up -d")
