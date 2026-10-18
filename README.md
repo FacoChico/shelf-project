@@ -31,4 +31,4 @@ Keycloak: http://localhost:8180/admin/ — realm `shelf`, клиент `shelf-we
 Отчёт: `build/reports/tests/test/index.html`.
 Jar: `build/libs/shelf-project-1.0.0.jar`.
 
-[Архитектура](docs/ARCHITECTURE.md) · [Скриншоты для отчёта](docs/SCREENSHOTS.md)
+[Архитектура](docs/ARCHITECTURE.md)
