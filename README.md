@@ -24,10 +24,10 @@ Keycloak: http://localhost:8180/admin/ — realm `shelf`, клиент `shelf-we
 
 ```bash
 ./gradlew check bootJar
-./gradlew spotlessApply   # форматирование Java: AOSP, отступ 4 пробела
+./gradlew spotlessApply
 ```
 
-Тесты используют H2 и тестовую OIDC-личность, Docker для них не нужен.
+Тесты используют H2 и тестовую OIDC-личность.
 Отчёт: `build/reports/tests/test/index.html`.
 Jar: `build/libs/shelf-project-1.0.0.jar`.
 
