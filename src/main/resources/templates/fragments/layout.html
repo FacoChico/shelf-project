@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#254d3e">
+  <title th:text="${title} + ' · Полка'">Полка</title>
+  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+  <script defer th:src="@{/js/app.js}"></script>
+</head>
+<body>
+<a th:fragment="brand" class="brand" th:href="@{/}"><span class="brand-mark" aria-hidden="true">п.</span><span>полка<span class="brand-dot">.</span></span></a>
+<aside th:fragment="sidebar" class="sidebar">
+  <div th:replace="~{fragments/layout :: brand}"></div>
+  <p class="sidebar-caption">ЛИЧНОЕ ПРОСТРАНСТВО</p>
+  <nav class="side-nav" aria-label="Основная навигация">
+    <a th:href="@{/shelf}" th:classappend="${activePage == 'shelf'} ? 'active'" th:attr="aria-current=${activePage == 'shelf' ? 'page' : null}"><svg th:replace="~{fragments/icons :: icon('shelf')}"></svg>Моя полка</a>
+    <a th:href="@{/profile}" th:classappend="${activePage == 'profile'} ? 'active'" th:attr="aria-current=${activePage == 'profile' ? 'page' : null}"><svg th:replace="~{fragments/icons :: icon('user')}"></svg>Мой профиль</a>
+  </nav>
+  <div class="sidebar-note"><span class="small-star" aria-hidden="true">✳</span><p>Хорошие истории<br>заслуживают места.</p><span>Сохраняй то, к чему<br>хочется вернуться.</span></div>
+  <div class="account"><span class="avatar" th:text="${#strings.substring(displayName, 0, 1)}">Ч</span><div><strong th:text="${displayName}">Читатель</strong><span>Твоя личная коллекция</span></div></div>
+  <form th:action="@{/logout}" method="post" class="logout-form"><button type="submit" class="text-button"><svg th:replace="~{fragments/icons :: icon('logout')}"></svg>Выйти</button></form>
+</aside>
+<footer th:fragment="footer" class="page-footer"><span>Меньше забытых рекомендаций. Больше хороших историй.</span><span>Полка / 2026</span></footer>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<svg th:fragment="icon(name)" class="icon" width="20" height="20" aria-hidden="true">
+    <use th:href="@{/icons.svg} + '#' + ${name}"></use>
+</svg>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Мой профиль')}"></head>
+<body><a class="skip-link" href="#main">К содержимому</a>
+<div class="app-shell">
+    <aside th:replace="~{fragments/layout :: sidebar}"></aside>
+    <main id="main" class="workspace">
+        <header class="page-heading">
+            <div><span class="eyebrow">ЗНАКОМОЕ МЕСТО</span>
+                <h1>Мой профиль<span class="title-dot">.</span></h1>
+                <p>У каждой полки есть свой человек.</p></div>
+        </header>
+        <section class="profile-card">
+            <div class="profile-intro"><span class="avatar avatar-large"
+                                             th:text="${#strings.substring(displayName, 0, 1)}">Ч</span>
+                <div><h2 th:text="${displayName}">Читатель</h2>
+                    <p th:text="${email ?: 'Email не указан в аккаунте'}"></p><span class="badge badge-done"><svg
+                            th:replace="~{fragments/icons :: icon('check')}"></svg>Вход выполнен</span></div>
+            </div>
+            <div class="profile-summary"><h3>Твоя коллекция в цифрах</h3>
+                <div class="stats-grid">
+                    <div class="stat"><span>Всего записей</span><strong th:text="${stats.total()}">0</strong></div>
+                    <div class="stat"><span>В планах</span><strong th:text="${stats.planned()}">0</strong></div>
+                    <div class="stat"><span>В процессе</span><strong th:text="${stats.inProgress()}">0</strong></div>
+                    <div class="stat"><span>Завершено</span><strong th:text="${stats.done()}">0</strong></div>
+                </div>
+                <div class="progress-caption"><span>Истории, дошедшие до финала</span><strong
+                        th:text="${stats.progress()} + '%'">0%</strong></div>
+                <progress max="100" th:value="${stats.progress()}" aria-label="Доля завершённых записей">0%</progress>
+            </div>
+            <div class="profile-bottom">
+                <p>
+                    <svg th:replace="~{fragments/icons :: icon('lock')}"></svg>
+                    Записи доступны только твоему аккаунту.
+                </p>
+                <a class="button button-outline" th:href="@{/shelf}">На мою полку
+                    <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
+                </a></div>
+        </section>
+        <footer th:replace="~{fragments/layout :: footer}"></footer>
+    </main>
+</div>
+</body>
+</html>

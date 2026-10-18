@@ -1,0 +1,37 @@
+name: shelf-project
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: shelf
+      POSTGRES_USER: shelf
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python3 scripts/init-local.py first}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - shelf-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U shelf -d shelf" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.1
+    command: [ "start-dev", "--import-realm" ]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: shelf-admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Run python3 scripts/init-local.py first}
+      KC_HOSTNAME: http://localhost:8180
+    ports:
+      - "127.0.0.1:8180:8080"
+    volumes:
+      - shelf-keycloak:/opt/keycloak/data
+      - ./.local/keycloak/shelf-realm.json:/opt/keycloak/data/import/shelf-realm.json:ro
+    restart: unless-stopped
+
+volumes:
+  shelf-postgres:
+  shelf-keycloak:

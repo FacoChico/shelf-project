@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:shelf-test;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ''
+app:
+  auth:
+    issuer-uri: http://localhost:8180/realms/shelf
+    client-id: shelf-web
+    client-secret: test-only-secret
+    post-logout-redirect-uri: http://localhost:8080/

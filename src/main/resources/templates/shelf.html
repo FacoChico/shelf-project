@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Моя полка')}"></head>
+<body><a class="skip-link" href="#main">К содержимому</a>
+<div class="app-shell">
+    <aside th:replace="~{fragments/layout :: sidebar}"></aside>
+    <main id="main" class="workspace">
+        <header class="page-heading">
+            <div><span class="eyebrow">ТВОЯ ЛИЧНАЯ КОЛЛЕКЦИЯ</span>
+                <h1>Моя полка<span class="title-dot">.</span></h1>
+                <p>Всё интересное — под рукой.</p></div>
+            <a class="button" th:href="@{/items/new}">
+                <svg th:replace="~{fragments/icons :: icon('plus')}"></svg>
+                Добавить запись</a></header>
+        <div class="alert" role="status" th:if="${notice}">
+            <svg th:replace="~{fragments/icons :: icon('check')}"></svg>
+            <span th:text="${notice}"></span></div>
+        <section class="stats-grid" aria-label="Статистика">
+            <div class="stat"><span>Всего на полке</span><strong th:text="${stats.total()}">0</strong></div>
+            <div class="stat"><span><i class="status-dot planned"></i>В планах</span><strong
+                    th:text="${stats.planned()}">0</strong></div>
+            <div class="stat"><span><i class="status-dot in-progress"></i>В процессе</span><strong
+                    th:text="${stats.inProgress()}">0</strong></div>
+            <div class="stat"><span><i class="status-dot done"></i>Завершено</span><strong
+                    th:text="${stats.done()}">0</strong></div>
+        </section>
+        <section class="collection" aria-label="Записи на полке">
+            <div class="collection-top">
+                <nav class="category-tabs" aria-label="Категории"><a
+                        th:href="@{/shelf(status=${selectedStatus},q=${query})}"
+                        th:classappend="${selectedCategory == null} ? 'selected'"
+                        th:attr="aria-current=${selectedCategory == null ? 'page' : null}">Всё</a><a
+                        th:each="c : ${categories}"
+                        th:href="@{/shelf(category=${c},status=${selectedStatus},q=${query})}"
+                        th:text="${@viewLabels.categoryPlural(c)}"
+                        th:classappend="${selectedCategory == c} ? 'selected'"
+                        th:attr="aria-current=${selectedCategory == c ? 'page' : null}">Книги</a></nav>
+                <span class="result-count" th:text="'Найдено: ' + ${#lists.size(items)}">Найдено: 0</span></div>
+            <form class="filters" th:action="@{/shelf}" method="get"><input th:if="${selectedCategory != null}"
+                                                                            type="hidden" name="category"
+                                                                            th:value="${selectedCategory}"><label
+                    class="search-field"><span class="sr-only">Найти по названию</span>
+                <svg th:replace="~{fragments/icons :: icon('search')}"></svg>
+                <input name="q" type="search" maxlength="160" placeholder="Найти ту самую историю…" th:value="${query}"></label><label
+                    class="status-filter"><span class="sr-only">Статус</span><select name="status">
+                <option value="">Все статусы</option>
+                <option th:each="s : ${statuses}" th:value="${s}" th:text="${@viewLabels.status(s)}"
+                        th:selected="${selectedStatus == s}"></option>
+            </select></label>
+                <button class="button button-outline" type="submit">Найти</button>
+                <a class="reset-link" th:if="${hasFilters}" th:href="@{/shelf}">Сбросить</a></form>
+            <div class="items-grid" th:unless="${#lists.isEmpty(items)}">
+                <article class="item-card" th:each="entry : ${items}">
+                    <div class="item-art" th:classappend="${'art-' + #strings.toLowerCase(entry.category.name())}"><span
+                            class="art-category" th:text="${@viewLabels.category(entry.category)}">Книга</span><span
+                            class="art-title" th:text="${entry.title}">Название</span><span class="art-number"
+                                                                                            th:text="'№ ' + ${entry.id}">№ 1</span><span
+                            class="art-orbit" aria-hidden="true"></span></div>
+                    <div class="item-body"><span class="badge"
+                                                 th:classappend="${'badge-' + #strings.toLowerCase(entry.status.name())}"><i
+                            class="status-dot"></i><span
+                            th:text="${@viewLabels.status(entry.status)}">В планах</span></span>
+                        <h2 th:text="${entry.title}">Название</h2>
+                        <p class="item-note"
+                           th:text="${#strings.isEmpty(entry.note) ? 'История ещё впереди. Оставь здесь пару слов для себя.' : entry.note}"></p>
+                        <a class="edit-link" th:href="@{/items/{id}/edit(id=${entry.id})}">Открыть запись
+                            <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
+                        </a></div>
+                </article>
+            </div>
+            <div class="empty-state" th:if="${#lists.isEmpty(items)}">
+                <div class="mini-books" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                <h2 th:text="${hasFilters ? 'Ничего не нашлось' : 'Первая история — за тобой'}">Первая история — за
+                    тобой</h2>
+                <p th:text="${hasFilters ? 'Попробуй другое название или сбрось фильтры.' : 'Добавь книгу, фильм или игру, к которым хочется вернуться.'}"></p>
+                <a th:if="${hasFilters}" class="button button-outline" th:href="@{/shelf}">Показать всю полку</a><a
+                    th:unless="${hasFilters}" class="button" th:href="@{/items/new}">
+                <svg th:replace="~{fragments/icons :: icon('plus')}"></svg>
+                Добавить первую запись</a></div>
+        </section>
+        <footer th:replace="~{fragments/layout :: footer}"></footer>
+    </main>
+</div>
+</body>
+</html>

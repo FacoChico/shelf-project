@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Место для хороших историй')}"></head>
+<body class="landing">
+<header class="landing-header">
+    <div th:replace="~{fragments/layout :: brand}"></div>
+    <a class="button button-outline" th:href="@{/login}">Войти
+        <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
+    </a></header>
+<main id="main" class="landing-main">
+    <section class="hero-copy"><span class="eyebrow">КНИГИ · ФИЛЬМЫ · ИГРЫ</span>
+        <h1>Всё, что хочется.<br><em>На одной полке.</em></h1>
+        <p class="hero-description">Та самая книга из разговора. Фильм, который все советуют. Игра на длинные выходные.
+            Сохрани — и возвращайся, когда придёт время.</p><a class="button" th:href="@{/login}">Собрать свою полку
+            <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
+        </a>
+        <p class="privacy-note">
+            <svg th:replace="~{fragments/icons :: icon('lock')}"></svg>
+            Твоя коллекция видна только тебе
+        </p>
+    </section>
+    <section class="hero-art" aria-label="Пример будущей коллекции">
+        <div class="art-caption"><span>ТВОЯ СЛЕДУЮЩАЯ ИСТОРИЯ</span><span>↗</span></div>
+        <div class="display-books" aria-hidden="true">
+            <div class="display-book book-one"><span>книги</span><strong>Между<br>строк</strong><small>01 /
+                ЧИТАТЬ</small></div>
+            <div class="display-book book-two"><span>фильмы</span><strong>Ещё<br>один<br>кадр</strong><small>02 /
+                СМОТРЕТЬ</small></div>
+            <div class="display-book book-three"><span>игры</span><strong>Новый<br>мир</strong><small>03 /
+                ИГРАТЬ</small></div>
+        </div>
+        <div class="wooden-shelf"></div>
+        <p class="art-footnote">Место найдётся для каждой истории.</p></section>
+    <section class="landing-features" aria-label="Возможности">
+        <div><span>01</span>
+            <h2>Не теряй находки</h2>
+            <p>Добавляй рекомендации, пока они свежи в памяти.</p></div>
+        <div><span>02</span>
+            <h2>Выбирай под настроение</h2>
+            <p>Книга на вечер или игра на выходные — всё рядом.</p></div>
+        <div><span>03</span>
+            <h2>Отмечай пройденное</h2>
+            <p>Меняй статус и оставляй заметки для себя.</p></div>
+    </section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

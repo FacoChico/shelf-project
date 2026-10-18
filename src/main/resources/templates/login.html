@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Вход')}"></head>
+<body class="landing">
+<header class="landing-header">
+    <div th:replace="~{fragments/layout :: brand}"></div>
+    <a th:href="@{/}" class="back-link">← На главную</a></header>
+<main id="main" class="login-main">
+    <section class="login-story"><span class="eyebrow">ДЛЯ ТОГО, ЧТО ТЕБЕ ИНТЕРЕСНО</span>
+        <h1>Хорошо, когда<br>всё <em>на месте.</em></h1>
+        <p>Войди, чтобы собрать свою коллекцию<br>и продолжить с того, на чём остановился.</p>
+        <div class="mini-books" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </section>
+    <section class="login-card"><span class="round-icon"><svg
+            th:replace="~{fragments/icons :: icon('user')}"></svg></span>
+        <h2>Твоя полка ждёт</h2>
+        <p>Один аккаунт для всех твоих историй.</p>
+        <div class="alert alert-error" role="alert" th:if="${param.error}">Не удалось войти. Попробуй ещё раз. Если
+            ошибка повторяется, проверь доступность сервера входа.
+        </div>
+        <a class="button button-full" th:href="@{/oauth2/authorization/keycloak}">Войти в аккаунт
+            <svg th:replace="~{fragments/icons :: icon('arrow')}"></svg>
+        </a>
+        <p class="login-hint">Откроется отдельная страница входа.<br>Пароль не передаётся приложению «Полка».</p>
+        <div class="login-divider"></div>
+        <p class="privacy-note">
+            <svg th:replace="~{fragments/icons :: icon('lock')}"></svg>
+            Личная коллекция. Только для тебя.
+        </p>
+    </section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>
