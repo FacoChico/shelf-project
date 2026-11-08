@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shelf-project
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shelf-project
+  template:
+    metadata:
+      labels:
+        app: shelf-project
+    spec:
+      containers:
+        - name: shelf
+          image: shelf-project:local
+          imagePullPolicy: Never
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: grafana
+            - name: APP_BIND_ADDRESS
+              value: 0.0.0.0
+            - name: DB_URL
+              value: jdbc:h2:mem:shelf;DB_CLOSE_DELAY=-1
+            - name: JAVA_TOOL_OPTIONS
+              value: -XX:+UseG1GC -Xms128m -Xmx256m
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: shelf-lab
+                  key: oidc-client-secret
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: management
+              containerPort: 8081
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: management
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: management
+          resources:
+            requests:
+              cpu: 100m
+              memory: 384Mi
+            limits:
+              memory: 768Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shelf-project
+  namespace: monitoring
+spec:
+  selector:
+    app: shelf-project
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+    - name: management
+      port: 8081
+      targetPort: management
