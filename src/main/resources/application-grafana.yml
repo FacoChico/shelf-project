@@ -1,0 +1,28 @@
+management:
+  server:
+    port: 8081
+  endpoint:
+    health:
+      access: read-only
+    prometheus:
+      access: read-only
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  tracing:
+    export:
+      enabled: true
+    sampling:
+      probability: 1.0
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: ${JAEGER_OTLP_ENDPOINT:http://jaeger-otlp:4318/v1/traces}
+logging:
+  level:
+    ru.shelf.web.HomeController: DEBUG

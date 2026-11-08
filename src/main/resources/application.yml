@@ -27,6 +27,17 @@ server:
   error:
     include-message: never
     include-stacktrace: never
+management:
+  endpoints:
+    access:
+      default: none
+  tracing:
+    export:
+      enabled: false
+  otlp:
+    metrics:
+      export:
+        enabled: false
 app:
   auth:
     issuer-uri: ${OIDC_ISSUER_URI:http://localhost:8180/realms/shelf}
